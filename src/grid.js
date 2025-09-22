@@ -58,6 +58,9 @@ const setStartEndPos = () => {
     let error = document.querySelector(".error-start");
 
     function handleClick(event) {
+      if (!positions["start"] && !positions["end"]) {
+        createGrid();
+      }
       error.innerText = "";
       error.classList.remove("visible");
 
@@ -66,14 +69,14 @@ const setStartEndPos = () => {
       if (positions["start"] == null) {
         let starting_cell = event.target.id;
         positions["start"] = starting_cell;
-        placeKnight(event.target.id, { start: true });
-        event.target.style.backgroundColor = "green";
+        placeKnight(starting_cell, { start: true });
+        document.getElementById(starting_cell).style.backgroundColor = "green";
         return;
       } else if (positions["end"] == null) {
         let ending_cell = event.target.id;
         positions["end"] = ending_cell;
-        placeKnight(event.target.id, { end: true });
-        event.target.style.backgroundColor = "purple";
+        placeKnight(ending_cell, { end: true });
+        document.getElementById(ending_cell).style.backgroundColor = "purple";
         return;
       }
     }
