@@ -121,14 +121,23 @@ const getPositions = (positions) => {
   return boardGraph.knight_moves(positions["start"], positions["end"]);
 };
 
-const showGhosts = (position_order) => {
+const showGhosts = async (position_order) => {
+  const mainContainer = document.querySelector(".main-container");
+
+  mainContainer.style.pointerEvents = "none";
+
   for (let i = 1; i < position_order.length; i++) {
     let positionArr = position_order[i].split(",");
     let positionString = positionArr.join("-");
-    setTimeout(() => {
-      placeKnight(positionString, { ghost: true }, i);
-    }, i * 1000);
+    await new Promise((resolve) =>
+      setTimeout(() => {
+        placeKnight(positionString, { ghost: true }, i);
+        resolve();
+      }, 1000),
+    );
   }
+
+  mainContainer.style.pointerEvents = "auto";
 };
 
 const displayLoop = async () => {
