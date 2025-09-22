@@ -67,6 +67,7 @@ body {
 .main-container .cell span {
   position: absolute;
   z-index: 999;
+  font-size: clamp(0.5rem, 1.5vw, 1rem);
 }
 
 .main-container .cell:hover {
