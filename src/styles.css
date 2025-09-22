@@ -1,0 +1,119 @@
+:root {
+  --grid-container-size: clamp(320px, 60vw, 560px);
+}
+body {
+  color: #fffad9;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    avenir next,
+    avenir,
+    segoe ui,
+    helvetica neue,
+    Adwaita Sans,
+    Cantarell,
+    Ubuntu,
+    roboto,
+    noto,
+    helvetica,
+    arial,
+    sans-serif;
+  background: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.grid-container {
+  position: relative;
+}
+
+.main-container {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-auto-rows: calc(var(--grid-container-size) / 8);
+  width: var(--grid-container-size);
+  height: var(--grid-container-size);
+}
+
+.filter {
+  pointer-events: none;
+  position: absolute;
+  z-index: 999;
+  background: #000000;
+  background: linear-gradient(
+    360deg,
+    rgba(0, 0, 0, 0.28) 1%,
+    rgba(246, 246, 246, 0.01) 31%,
+    rgba(251, 251, 251, 0) 70%,
+    rgba(255, 255, 255, 0.36) 98%
+  );
+  width: var(--grid-container-size);
+  height: var(--grid-container-size);
+}
+
+.main-container .cell {
+  position: relative;
+  border: 2px solid #361717;
+  color: white;
+  background-color: #fffad9;
+}
+
+.main-container .cell.black {
+  background-color: #361717;
+}
+
+.main-container .cell span {
+  position: absolute;
+  z-index: 999;
+}
+
+.main-container .cell:hover {
+  background-color: grey;
+}
+
+.error {
+  visibility: hidden;
+}
+
+span.visible {
+  visibility: visible;
+}
+
+#knight {
+  z-index: 2;
+  left: 0;
+  position: absolute;
+  width: calc(var(--grid-container-size) / 9);
+  height: auto;
+}
+
+#knight.ghost {
+  filter: invert(96%) sepia(86%) saturate(807%) hue-rotate(342deg)
+    brightness(86%) contrast(87%);
+}
+
+.start {
+  margin-top: 12px;
+}
+
+button {
+  padding: 12px;
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.ghost {
+  opacity: 0;
+  animation: fadeInScale 0.5s ease-out forwards;
+}
